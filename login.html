@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-<head>
+<head><!-- GitHub数据同步模块 -->
+<script src="js/github-sync.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xhobon 管理后台登录</title>
@@ -394,5 +396,85 @@
             }, 800);
         }
     </script>
+<body>
+  <div class="login-container">
+    <div class="login-logo">
+      <h1>后台系统登录</h1>
+    </div>
+
+    <!-- ✅ 登录表单开始 -->
+    <form id="login-form">
+
+      <!-- 用户名 / 密码输入框等 -->
+
+      <!-- ✅ 现在在这里插入 GitHub 输入框 -->
+      <div class="form-group">
+        <label for="github-token">GitHub令牌</label>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="fas fa-key"></i></span>
+          </div>
+          <input type="password" id="github-token" class="form-control" placeholder="请输入 GitHub 个人访问令牌">
+          <div class="input-group-append">
+            <button type="button" class="btn btn-outline-secondary toggle-password">
+              <i class="fas fa-eye"></i>
+            </button>
+          </div>
+        </div>
+        <small class="form-text text-muted">用于数据同步，如果没有请先创建</small>
+      </div>
+
+      <!-- 登录按钮 -->
+      <button type="submit" id="login-button" class="btn btn-primary">登录</button>
+    </form>
+    <!-- ✅ 登录表单结束 -->
+
+    <!-- ✅ JavaScript 写在表单之后，HTML 的结尾部分 -->
+    <script>
+      // 你的逻辑代码（如：rememberMe、跳转、设置 localStorage）...
+
+      // ✅ 密码可见脚本（如果你还没写上）
+      document.addEventListener('DOMContentLoaded', function () {
+        const toggleBtn = document.querySelector('.toggle-password');
+        const tokenInput = document.getElementById('github-token');
+
+        if (toggleBtn && tokenInput) {
+          toggleBtn.addEventListener('click', function () {
+            const type = tokenInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            tokenInput.setAttribute('type', type);
+
+            const icon = this.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+          });
+        }
+      });
+    </script>
+  </div>
 </body>
-</html>
+// 登录处理
+document.getElementById('login-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+  const githubToken = document.getElementById('github-token').value;
+  
+  // 验证登录凭据
+  if (username === '67297626' && password === 'zx577521') {
+    // 保存GitHub令牌
+    if (githubToken) {
+      setGitHubToken(githubToken);
+    }
+    
+    // 显示登录成功消息
+    showLoginMessage('登录成功，正在跳转...', 'success');
+    
+    // 跳转到管理面板
+    setTimeout(function() {
+      window.location.href = 'index.html';
+    }, 1500);
+  } else {
+    showLoginMessage('用户名或密码错误', 'error');
+  }
+});
