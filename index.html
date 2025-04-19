@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xhobon 管理后台</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/admin-style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- 左侧导航栏 -->
+            <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark sidebar">
+                <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
+                    <a href="index.html" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                        <span class="fs-5 d-none d-sm-inline">Xhobon</span>
+                        <span class="badge bg-primary ms-2">NEW</span>
+                    </a>
+                    
+                    <!-- 语言选择器 -->
+                    <div class="dropdown pb-4 w-100">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="language-dropdown" data-bs-toggle="dropdown">
+                            <i class="bi bi-globe me-2"></i>
+                            <span class="d-none d-sm-inline" data-i18n="language">语言</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item language-option" href="#" data-lang="zh-CN">中文</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="en-US">English</a></li>
+                            <li><a class="dropdown-item language-option" href="#" data-lang="id-ID">Bahasa Indonesia</a></li>
+                        </ul>
+                    </div>
+                    
+                    <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start w-100" id="menu">
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link active align-middle px-0" data-page="dashboard">
+                                <i class="bi bi-speedometer2 me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="dashboard">概述</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="products">
+                                <i class="bi bi-box-seam me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="products">产品</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="orders">
+                                <i class="bi bi-cart3 me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="orders">订单</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="customers">
+                                <i class="bi bi-people me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="customers">客户</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="marketing">
+                                <i class="bi bi-megaphone me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="marketing">营销</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="payments">
+                                <i class="bi bi-credit-card me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="payments">支付设置</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="shipping">
+                                <i class="bi bi-truck me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="shipping">物流设置</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="analytics">
+                                <i class="bi bi-graph-up me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="analytics">分析</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="settings">
+                                <i class="bi bi-gear me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="settings">网站设置</span>
+                            </a>
+                        </li>
+                        <li class="nav-item w-100">
+                            <a href="#" class="nav-link px-0 align-middle" data-page="staff">
+                                <i class="bi bi-person-badge me-2"></i> <span class="ms-1 d-none d-sm-inline" data-i18n="staff">员工管理</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <hr>
+                    <div class="dropdown pb-4 w-100">
+                        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="user-dropdown" data-bs-toggle="dropdown">
+                            <img src="images/avatar.png" alt="Admin" width="30" height="30" class="rounded-circle me-2">
+                            <span class="d-none d-sm-inline">Admin</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                            <li><a class="dropdown-item" href="#" data-i18n="profile">个人资料</a></li>
+                            <li><a class="dropdown-item" href="#" data-i18n="settings">设置</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="logout-btn" data-i18n="logout">退出登录</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 主内容区域 -->
+            <div class="col py-3 main-content">
+                <!-- 顶部导航栏 -->
+                <nav class="navbar navbar-expand-lg navbar-light bg-light mb-4 rounded">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="navbar-nav ms-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" id="visit-site" target="_blank" data-i18n="visit-site">访问网站</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#" id="notifications">
+                                        <i class="bi bi-bell"></i>
+                                        <span class="badge bg-danger">3</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                
+                <!-- 页面内容 -->
+                <div id="page-content">
+                    <!-- 仪表盘页面 -->
+                    <div class="page-section active" id="dashboard-page">
+                        <h2 class="mb-4" data-i18n="dashboard-title">仪表盘</h2>
+                        
+                        <!-- 统计卡片 -->
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-primary text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="card-title" data-i18n="total-orders">总订单</h6>
+                                                <h2 class="mb-0">152</h2>
+                                            </div>
+                                            <i class="bi bi-cart3 fs-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a href="#" class="text-white text-decoration-none" data-i18n="view-details">查看详情</a>
+                                        <div class="small text-white"><i class="bi bi-arrow-up"></i> 12%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-success text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="card-title" data-i18n="total-revenue">总收入</h6>
+                                                <h2 class="mb-0">¥25,842</h2>
+                                            </div>
+                                            <i class="bi bi-currency-yen fs-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a href="#" class="text-white text-decoration-none" data-i18n="view-details">查看详情</a>
+                                        <div class="small text-white"><i class="bi bi-arrow-up"></i> 8%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-warning text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="card-title" data-i18n="total-customers">总客户</h6>
+                                                <h2 class="mb-0">84</h2>
+                                            </div>
+                                            <i class="bi bi-people fs-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a href="#" class="text-white text-decoration-none" data-i18n="view-details">查看详情</a>
+                                        <div class="small text-white"><i class="bi bi-arrow-up"></i> 5%</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mb-3">
+                                <div class="card bg-danger text-white h-100">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div>
+                                                <h6 class="card-title" data-i18n="total-products">总产品</h6>
+                                                <h2 class="mb-0">35</h2>
+                                            </div>
+                                            <i class="bi bi-box-seam fs-1"></i>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a href="#" class="text-white text-decoration-none" data-i18n="view-details">查看详情</a>
+                                        <div class="small text-white"><i class="bi bi-arrow-up"></i> 3%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 最近订单和销售图表 -->
+                        <div class="row">
+                            <div class="col-md-8 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-graph-up me-1"></i>
+                                        <span data-i18n="sales-overview">销售概览</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="salesChart" width="100%" height="40"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-cart3 me-1"></i>
+                                        <span data-i18n="recent-orders">最近订单</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-i18n="order-id">订单号</th>
+                                                        <th data-i18n="customer">客户</th>
+                                                        <th data-i18n="status">状态</th>
+                                                        <th data-i18n="amount">金额</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>#1234</td>
+                                                        <td>张三</td>
+                                                        <td><span class="badge bg-success" data-i18n="completed">已完成</span></td>
+                                                        <td>¥1,200</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#1235</td>
+                                                        <td>李四</td>
+                                                        <td><span class="badge bg-warning" data-i18n="processing">处理中</span></td>
+                                                        <td>¥850</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#1236</td>
+                                                        <td>王五</td>
+                                                        <td><span class="badge bg-info" data-i18n="shipped">已发货</span></td>
+                                                        <td>¥2,100</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>#1237</td>
+                                                        <td>赵六</td>
+                                                        <td><span class="badge bg-danger" data-i18n="cancelled">已取消</span></td>
+                                                        <td>¥950</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <a href="#" class="btn btn-sm btn-primary" data-i18n="view-all-orders">查看所有订单</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 热门产品和库存提醒 -->
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-star me-1"></i>
+                                        <span data-i18n="top-products">热门产品</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-i18n="product">产品</th>
+                                                        <th data-i18n="sales">销量</th>
+                                                        <th data-i18n="revenue">收入</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>小米手机13</td>
+                                                        <td>42</td>
+                                                        <td>¥167,958</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Redmi K60</td>
+                                                        <td>38</td>
+                                                        <td>¥114,000</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>小米平板6 Pro</td>
+                                                        <td>25</td>
+                                                        <td>¥74,750</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>小米手表S3</td>
+                                                        <td>18</td>
+                                                        <td>¥17,820</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <i class="bi bi-exclamation-triangle me-1"></i>
+                                        <span data-i18n="inventory-alerts">库存提醒</span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-sm">
+                                                <thead>
+                                                    <tr>
+                                                        <th data-i18n="product">产品</th>
+                                                        <th data-i18n="current-stock">当前库存</th>
+                                                        <th data-i18n="status">状态</th>
+                                                        <th data-i18n="action">操作</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>小米手机13 Pro</td>
+                                                        <td>5</td>
+                                                        <td><span class="badge bg-warning" data-i18n="low-stock">库存低</span></td>
+                                                        <td><button class="btn btn-sm btn-primary" data-i18n="restock">补货</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Redmi Buds 4</td>
+                                                        <td>2</td>
+                                                        <td><span class="badge bg-danger" data-i18n="critical">紧急</span></td>
+                                                        <td><button class="btn btn-sm btn-primary" data-i18n="restock">补货</button></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>小米电视A Pro 65"</td>
+                                                        <td>3</td>
+                                                        <td><span class="badge bg-warning" data-i18n="low-stock">库存低</span></td>
+                                                        <td><button class="btn btn-sm btn-primary" data-i18n="restock">补货</button></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 其他页面内容将通过JavaScript动态加载 -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 登录模态框 -->
+    <div class="modal fade" id="loginModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-i18n="login">登录</h5>
+                </div>
+                <div class="modal-body">
+                    <form id="login-form">
+                        <div class="mb-3">
+                            <label for="username" class="form-label" data-i18n="username">用户名</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label" data-i18n="password">密码</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="remember-me">
+                            <label class="form-check-label" for="remember-me" data-i18n="remember-me">记住我</label>
+                        </div>
+                        <div class="alert alert-danger d-none" id="login-error" role="alert"></div>
+                        <button type="submit" class="btn btn-primary w-100" data-i18n="login-button">登录</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+    <script src="js/admin-translations.js"></script>
+    <script src="js/admin-script.js"></script>
+</body>
+</html>

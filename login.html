@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xhobon 管理后台登录</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/admin-style.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .login-container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+        }
+        .login-logo {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .login-logo h1 {
+            color: #1976d2;
+            font-weight: 700;
+        }
+        .login-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .login-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-5px);
+        }
+        .login-header {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .login-body {
+            padding: 20px;
+        }
+        .language-selector {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        .input-group-text {
+            background-color: #f8f9fa;
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+        }
+        .input-group:focus-within .input-group-text {
+            border-color: #86b7fe;
+        }
+        .input-group:focus-within .form-control {
+            border-color: #86b7fe;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1976d2, #0d47a1);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(25, 118, 210, 0.3);
+        }
+        .alert {
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.8rem;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+    <div class="language-selector">
+        <div class="dropdown">
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-globe"></i> 中文
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="languageDropdown">
+                <li><a class="dropdown-item language-option" href="#" data-lang="zh-CN">中文</a></li>
+                <li><a class="dropdown-item language-option" href="#" data-lang="en-US">English</a></li>
+                <li><a class="dropdown-item language-option" href="#" data-lang="id-ID">Bahasa Indonesia</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="login-logo">
+            <h1>Xhobon</h1>
+            <p class="text-muted" data-i18n="admin-panel">管理后台</p>
+        </div>
+        <div class="login-card">
+            <div class="login-header">
+                <h2 data-i18n="login">登录</h2>
+                <p data-i18n="login-subtitle">请输入您的账号和密码</p>
+            </div>
+            <div class="login-body">
+                <form id="login-form">
+                    <div class="mb-3">
+                        <label for="username" class="form-label" data-i18n="username">用户名</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-person"></i></span>
+                            <input type="text" class="form-control" id="username" placeholder="67297626" required autocomplete="username">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label" data-i18n="password">密码</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+                            <input type="password" class="form-control" id="password" placeholder="••••••••" required autocomplete="current-password">
+                            <button class="btn btn-outline-secondary toggle-password" type="button">
+                                <i class="bi bi-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="remember-me">
+                        <label class="form-check-label" for="remember-me" data-i18n="remember-me">记住我</label>
+                    </div>
+                    <div class="alert alert-danger d-none" id="login-error" role="alert" data-i18n="login-error">
+                        用户名或密码错误
+                    </div>
+                    <div class="alert alert-success d-none" id="login-success" role="alert" data-i18n="login-success">
+                        登录成功，正在跳转...
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary" data-i18n="login-button">登录</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="login-footer">
+            <p>&copy; 2025 Xhobon. <span data-i18n="all-rights-reserved">保留所有权利</span>.</p>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/admin-translations.js"></script>
+    <script>
+        // 当文档加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            // 设置默认语言
+            setLanguage(getPreferredLanguage());
+            
+            // 检查是否已经登录
+            checkLoginStatus();
+            
+            // 绑定登录表单提交事件
+            const loginForm = document.getElementById('login-form');
+            if (loginForm) {
+                loginForm.addEventListener('submit', handleLogin);
+            }
+            
+            // 绑定语言切换事件
+            const languageOptions = document.querySelectorAll('.language-option');
+            languageOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    setLanguage(this.getAttribute('data-lang'));
+                });
+            });
+            
+            // 绑定密码显示/隐藏事件
+            const togglePasswordButtons = document.querySelectorAll('.toggle-password');
+            togglePasswordButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const passwordInput = this.parentElement.querySelector('input');
+                    const icon = this.querySelector('i');
+                    
+                    if (passwordInput.type === 'password') {
+                        passwordInput.type = 'text';
+                        icon.classList.remove('bi-eye');
+                        icon.classList.add('bi-eye-slash');
+                    } else {
+                        passwordInput.type = 'password';
+                        icon.classList.remove('bi-eye-slash');
+                        icon.classList.add('bi-eye');
+                    }
+                });
+            });
+            
+            // 自动填充记住的用户名
+            const rememberedUsername = localStorage.getItem('username');
+            if (rememberedUsername) {
+                document.getElementById('username').value = rememberedUsername;
+                document.getElementById('remember-me').checked = true;
+            }
+        });
+
+        /**
+         * 检查用户是否已经登录
+         */
+        function checkLoginStatus() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn === 'true') {
+                // 已经登录，重定向到管理后台主页
+                window.location.href = 'index.html';
+            }
+        }
+
+        /**
+         * 获取首选语言
+         * @returns {string} 语言代码
+         */
+        function getPreferredLanguage() {
+            // 首先检查URL参数
+            const urlParams = new URLSearchParams(window.location.search);
+            const langParam = urlParams.get('lang');
+            if (langParam && ['zh-CN', 'en-US', 'id-ID'].includes(langParam)) {
+                return langParam;
+            }
+            
+            // 然后检查本地存储
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                return savedLang;
+            }
+            
+            // 然后检查浏览器语言
+            const browserLang = navigator.language || navigator.userLanguage;
+            
+            // 根据浏览器语言返回支持的语言
+            if (browserLang.startsWith('zh')) {
+                return 'zh-CN';
+            } else if (browserLang.startsWith('id')) {
+                return 'id-ID';
+            } else {
+                return 'en-US'; // 默认英语
+            }
+        }
+
+        /**
+         * 设置界面语言
+         * @param {string} lang - 语言代码
+         */
+        function setLanguage(lang) {
+            // 保存语言偏好
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // 更新所有带有data-i18n属性的元素
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                el.textContent = getTranslation(key, lang);
+            });
+            
+            // 更新语言下拉菜单显示
+            const languageText = {
+                'zh-CN': '中文',
+                'en-US': 'English',
+                'id-ID': 'Bahasa Indonesia'
+            };
+            
+            const languageDropdown = document.getElementById('languageDropdown');
+            if (languageDropdown) {
+                languageDropdown.innerHTML = `<i class="bi bi-globe"></i> ${languageText[lang] || getTranslation('language', lang)}`;
+            }
+            
+            // 更新页面标题
+            document.title = `Xhobon ${getTranslation('admin-panel', lang)}`;
+            
+            // 更新表单占位符
+            updatePlaceholders(lang);
+        }
+
+        /**
+         * 更新表单占位符
+         * @param {string} lang - 语言代码
+         */
+        function updatePlaceholders(lang) {
+            // 用户名占位符
+            const usernamePlaceholder = {
+                'zh-CN': '67297626',
+                'en-US': '67297626',
+                'id-ID': '67297626'
+            };
+            
+            // 密码占位符
+            const passwordPlaceholder = {
+                'zh-CN': '••••••••',
+                'en-US': '••••••••',
+                'id-ID': '••••••••'
+            };
+            
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            
+            if (usernameInput) {
+                usernameInput.placeholder = usernamePlaceholder[lang] || usernamePlaceholder['en-US'];
+            }
+            
+            if (passwordInput) {
+                passwordInput.placeholder = passwordPlaceholder[lang] || passwordPlaceholder['en-US'];
+            }
+        }
+
+        /**
+         * 获取翻译文本
+         * @param {string} key - 翻译键
+         * @param {string} [lang] - 语言代码，如果未提供则使用当前语言
+         * @returns {string} 翻译后的文本
+         */
+        function getTranslation(key, lang) {
+            // 如果未提供语言，使用当前语言
+            const currentLang = lang || localStorage.getItem('preferredLanguage') || 'zh-CN';
+            
+            // 从翻译数据中获取文本
+            try {
+                return translations[currentLang][key] || key;
+            } catch (e) {
+                return key; // 如果找不到翻译，返回键名
+            }
+        }
+
+        /**
+         * 处理登录
+         * @param {Event} e - 表单提交事件
+         */
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            const loginError = document.getElementById('login-error');
+            const loginSuccess = document.getElementById('login-success');
+            const submitButton = document.querySelector('button[type="submit"]');
+            
+            // 禁用提交按钮，防止重复提交
+            submitButton.disabled = true;
+            submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ' + getTranslation('logging-in');
+            
+            // 隐藏之前的错误信息
+            loginError.classList.add('d-none');
+            
+            // 模拟网络延迟
+            setTimeout(() => {
+                // 验证用户名和密码（使用用户指定的凭据）
+                if (username === '67297626' && password === 'zx577521') {
+                    // 登录成功
+                    loginSuccess.classList.remove('d-none');
+                    
+                    // 保存登录状态
+                    localStorage.setItem('isLoggedIn', 'true');
+                    localStorage.setItem('loginTime', new Date().toISOString());
+                    
+                    // 如果选择了"记住我"，保存用户名
+                    if (rememberMe) {
+                        localStorage.setItem('username', username);
+                    } else {
+                        localStorage.removeItem('username');
+                    }
+                    
+                    // 延迟重定向到管理后台主页
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1000);
+                } else {
+                    // 登录失败
+                    loginError.textContent = getTranslation('login-error');
+                    loginError.classList.remove('d-none');
+                    
+                    // 恢复提交按钮
+                    submitButton.disabled = false;
+                    submitButton.textContent = getTranslation('login-button');
+                    
+                    // 清空密码字段
+                    document.getElementById('password').value = '';
+                }
+            }, 800);
+        }
+    </script>
+</body>
+</html>

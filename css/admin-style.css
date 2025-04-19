@@ -1,0 +1,233 @@
+/* 管理后台样式 - Shoptop风格 */
+
+:root {
+    --primary-color: #1976d2;
+    --secondary-color: #f5f5f5;
+    --text-color: #333;
+    --sidebar-bg: #1e293b;
+    --sidebar-text: #fff;
+    --hover-color: #0d47a1;
+    --border-color: #e0e0e0;
+    --success-color: #4caf50;
+    --warning-color: #ff9800;
+    --danger-color: #f44336;
+    --info-color: #2196f3;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    background-color: var(--sidebar-bg);
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    padding-top: 20px;
+    z-index: 100;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar a {
+    color: var(--sidebar-text);
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    transition: all 0.3s;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar .nav-link.active {
+    background-color: var(--primary-color);
+}
+
+.sidebar .badge {
+    font-size: 0.7em;
+    padding: 3px 6px;
+}
+
+/* 主内容区域 */
+.main-content {
+    padding: 20px;
+    transition: all 0.3s;
+}
+
+/* 卡片样式 */
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    padding: 15px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-footer {
+    background-color: #fff;
+    border-top: 1px solid var(--border-color);
+    padding: 15px;
+}
+
+/* 表格样式 */
+.table {
+    margin-bottom: 0;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #666;
+}
+
+.table td, .table th {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+/* 按钮样式 */
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--hover-color);
+    border-color: var(--hover-color);
+}
+
+/* 徽章样式 */
+.badge {
+    padding: 5px 10px;
+    font-weight: 500;
+}
+
+/* 导航栏样式 */
+.navbar {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 登录模态框 */
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--primary-color);
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    
+    .sidebar .d-none.d-sm-inline {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 60px;
+    }
+}
+
+/* 页面切换动画 */
+.page-section {
+    display: none;
+    animation: fadeIn 0.5s;
+}
+
+.page-section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 统计卡片样式 */
+.card.bg-primary, .card.bg-success, .card.bg-warning, .card.bg-danger {
+    color: white;
+}
+
+.card.bg-primary {
+    background: linear-gradient(135deg, #2196f3, #0d47a1);
+}
+
+.card.bg-success {
+    background: linear-gradient(135deg, #4caf50, #2e7d32);
+}
+
+.card.bg-warning {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+}
+
+.card.bg-danger {
+    background: linear-gradient(135deg, #f44336, #b71c1c);
+}
+
+/* 用户下拉菜单 */
+.dropdown-menu {
+    border: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+/* 表单样式 */
+.form-control {
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid var(--border-color);
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+/* 加载动画 */
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
+
+.loading::after {
+    content: "";
+    width: 40px;
+    height: 40px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
